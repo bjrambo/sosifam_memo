@@ -10,25 +10,8 @@
     </author>
 	
 	<extra_vars>
-			<var name="default_style" type="select">
-            <title xml:lang="ko">기본 형태</title>
-            <options value="list">
-                <title xml:lang="ko">한줄프로필메모</title>
-            </options>
-            <options value="none">
-                <title xml:lang="ko">한줄메모</title>
-            </options>
-			<options value="pp">
-                <title xml:lang="ko">한줄프로필메모형식(프로필미지원)</title>
-            </options>
-        </var>
 		
-		<var name="profile_img" type="image">
-            <title xml:lang="ko">프로필없음(비회원)</title>
-            <description xml:lang="ko">기본 35x35 사이즈이며 사이즈 상관없이 고정됩니다.</description>
-        </var>
-		
-		<var name="profile_member" type="image">
+		<var name="no_profile" type="image">
             <title xml:lang="ko">프로필없음(회원)</title>
             <description xml:lang="ko">기본 35x35 사이즈이며 사이즈 상관없이 고정됩니다.</description>
         </var>

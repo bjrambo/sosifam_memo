@@ -80,7 +80,7 @@
 						<a  class="lulu-comment-thumb-link clarity-thumb avatar-radius" href="{getUrl('document_srl', $oDocument->document_srl)}#comment">
 							<img class="lulu-comment-thumb-img avatar-icons" src="{$comment->getProfileImage()}" cond="$comment->getProfileImage()" />
 							<img class="lulu-comment-thumb-img avatar-icons" src="{$module_info->no_profile}" cond="!$comment->getProfileImage() && $module_info->no_profile" />
-							<img class="lulu-comment-thumb-img avatar-icons" src="./img/no-profile.jpg" cond="!$comment->getProfileImage() && !$module_info->no_profile" />
+							<img class="lulu-comment-thumb-img avatar-icons" src="./css/profile.gif" cond="!$comment->getProfileImage() && !$module_info->no_profile" />
 						</a>
                         
 						<div class="lulu-comment-info pix-lulu-comment">
@@ -103,11 +103,6 @@
 									<!--@end-->
 									{$comment->getContentText(text)}
 								</div>
-							
-							
-							
-							
-							
 								<!--@if(!$oDocument->isNotice() && $grant->write_comment)-->
 								<a href="#" onclick="toggle_object('1reply_{$comment->comment_srl}'); return false;" title="{$lang->cmd_reply}" cond="$grant->write_comment" class="clarity-white btn_reply mr-f4" style="float:right" ><span>{$lang->cmd_reply}</span></a>			
 
