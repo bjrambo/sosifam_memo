@@ -1,4 +1,31 @@
 <script cond="$document_srl">location.href="{getUrl('','mid',$mid,'page',$page)}"</script>
+<!--@if($module_info->list_more == 'Y')-->
+<script type="text/javascript"> 
+jQuery(function($) {
+	var $container = $('.lulu-list');
+
+	$container.infinitescroll({
+      navSelector  : '.elise-pagination',    // selector for the paged navigation 
+      nextSelector : '.page-link',  // selector for the NEXT link (to page 2)
+      itemSelector : '.lulu-list .lulu-item',     // selector for all items you'll retrieve
+      loading: {
+          finishedMsg: 'Last page'
+        }
+      },
+      function( newElements ) {
+        var $newElems = $( newElements ).css({ opacity: 0 });
+        $newElems.imagesLoaded(function(){
+          $newElems.animate({ opacity: 1 });
+          $container.masonry( 'appended', $newElems, true ); 
+        });
+      }
+    );
+  
+
+});
+</script>
+<!--@end-->
+
 <ul class="lulu-list cfixsosi clarity-font" id="lulu">
 
 	<li class="lulu-item cfixsosi" loop="$document_list=>$no,$oDocument">
@@ -12,8 +39,13 @@
 				<div class="lulu-content">
 					<div class="lulu-content-title" >
 						<div class="lulu-content-info pix-lulu<!--@if(!$oDocument->getThumbnail())-->-help<!--@end-->">
-
+							<a class="lulu-title-item category left" href="{getUrl('category',$oDocument->get('category_srl'), 'document_srl', '')}" cond="$module_info->use_category == 'Y' && $oDocument->get('category_srl')">
+								<span style="color:{$category_list[$oDocument->get('category_srl')]->color};"|cond="$category_list[$oDocument->get('category_srl')]->color != transparent" style="color:#000;"|cond="$category_list[$oDocument->get('category_srl')]->color == 'transparent'">{$category_list[$oDocument->get('category_srl')]->title}</span>
+							</a>
 							<a id="list_{$oDocument->document_srl}" href="#" onclick="toggle_object('sosireply_{$oDocument->document_srl}'); return false;"|cond="!$oDocument->isNotice() && $grant->write_comment" class="lulu-title-link">{$oDocument->getTitle($module_info->title_cut_size)} {$oDocument->printExtraImages(60*60*$module_info->duration_new)}</a>
+							<span class="lulu-title-item bullet">•</span> 
+							<span class="lulu-title-link time-data">{getTimeGap($oDocument->get('regdate'), "Y.m.d")}</span>
+
 
 						</div>
 
@@ -25,9 +57,7 @@
 					<li class="lulu-info-item nickname clarity-font left">
 						<a href="#popup_menu_area" class="lulu-info-link member_{$oDocument->get('member_srl')}" onclick="return false">{$oDocument->getNickName()}</a>
 					</li>
-					<li class="lulu-info-item category left" cond="$module_info->use_category == 'Y' && $oDocument->get('category_srl')">
-						<a href="{getUrl('category',$oDocument->get('category_srl'), 'document_srl', '')}" class="sm_category" style="color:{$category_list[$oDocument->get('category_srl')]->color};"|cond="$category_list[$oDocument->get('category_srl')]->color != transparent" style="color:#000;"|cond="$category_list[$oDocument->get('category_srl')]->color == 'transparent'">{$category_list[$oDocument->get('category_srl')]->title}</a>
-					</li>
+
 					<li class="lulu-info-item buttonbar cla-comments right">
 						<a href="#" onclick="toggle_object('sosireply_{$oDocument->document_srl}'); return false;"|cond="!$oDocument->isNotice() && $grant->write_comment">댓글 <span class="stats red">{$oDocument->getCommentCount()}</span></a>
 					</li>
@@ -37,40 +67,39 @@
 					<li class="lulu-info-item buttonbar clarity-font right">
 						<a cond="$oDocument->isEditable()" href="{getUrl('act','dispBoardDelete','document_srl',$oDocument->document_srl, 'comment_srl','')}" title="{$lang->cmd_delete}"  >{$lang->cmd_delete}</a>
 					</li>
-					<li class="lulu-info-item time-ago left">{getTimeGap($oDocument->get('regdate'), "Y.m.d")}</li>
 				</ul>
 
 			</div>
 
-						<!-- 댓글 입력 폼 -->
-						<div class="bd" id="sosireply_{$oDocument->document_srl}" style="display:none;">
-							<!--@if($grant->write_comment)-->
-							<load target="filter/insert_comment.xml" />
-							<form action="./" method="post" onsubmit="return procFilter(this, insert_comment)">
-							<input type="hidden" name="mid" value="{$mid}" />
-							<input type="hidden" name="document_srl" value="{$oDocument->document_srl}" />
-							<input type="hidden" name="comment_srl" value="" />
+			<!-- 댓글 입력 폼 -->
+			<div class="bd" id="sosireply_{$oDocument->document_srl}" style="display:none;">
+				<!--@if($grant->write_comment)-->
+				<load target="filter/insert_comment.xml" />
+				<form action="./" method="post" onsubmit="return procFilter(this, insert_comment)">
+				<input type="hidden" name="mid" value="{$mid}" />
+				<input type="hidden" name="document_srl" value="{$oDocument->document_srl}" />
+				<input type="hidden" name="comment_srl" value="" />
 
-										<h2>{$lang->comment}</h2>
-										<textarea name="content" title="{$lang->title}" class="itx" rows="2" style=" height:100px"></textarea>
+							<h2>{$lang->comment}</h2>
+							<textarea name="content" title="{$lang->title}" class="itx" rows="2" style=" height:100px"></textarea>
 
-									<!--@if(!$is_logged)-->
+						<!--@if(!$is_logged)-->
 
-										<h2>{$lang->writer}</h2>
-										<input name="nick_name" type="text" id="uName" class="itx" />
+							<h2>{$lang->writer}</h2>
+							<input name="nick_name" type="text" id="uName" class="itx" />
 
-										<h2>{$lang->password}</h2>
-										<input name="password" type="password" id="uPw" class="itx" />
+							<h2>{$lang->password}</h2>
+							<input name="password" type="password" id="uPw" class="itx" />
 
-									<!--@endif-->
+						<!--@endif-->
 
-								<div style=" text-align:center; margin-bottom:10px;">
-									<button type="submit" class="sm-btn">{$lang->cmd_comment_registration}</button>
-									<a href="#" onclick="toggle_object('reply_{$oDocument->document_srl}'); return false;" title="{$lang->cmd_cancel}" class="sm-btn-de">{$lang->cmd_cancel}</a>
-								</div>
-							</form>
-							<!--@end-->                
-						</div>
+					<div style=" text-align:center; margin-bottom:10px;">
+						<button type="submit" class="sm-btn">{$lang->cmd_comment_registration}</button>
+						<a href="#" onclick="toggle_object('reply_{$oDocument->document_srl}'); return false;" title="{$lang->cmd_cancel}" class="sm-btn-de">{$lang->cmd_cancel}</a>
+					</div>
+				</form>
+				<!--@end-->                
+			</div>
 
 			 <ul class="lulu-comment" cond="$oDocument->getCommentCount()">{@$lulu=1}
 
@@ -130,7 +159,6 @@
 				<img class="lulu-thumb-img avatar-icons" src="{$module_info->profile_member}" cond="!$oDocument->getProfileImage() && $module_info->profile_member" />
 				<img class="lulu-thumb-img avatar-icons" src="./css/profile.gif" cond="!$oDocument->getProfileImage() && !$module_info->profile_member" />
 			</a>
-			
 		</div>
 
 

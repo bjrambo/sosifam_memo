@@ -22,9 +22,13 @@
 <!--@end-->
 
 
-<!--%import("js/mboard.js")-->
-<!--%import("css/mboard.css")-->
-<!--%import("filter/insert.xml")-->
+<load target="js/mboard.js" />
+<!--@if($module_info->list_more == 'Y')-->
+<load target="js/jquery.infinitescroll.js" />
+<load target="js/jquery.masonry.min.js" />
+<!--@end-->
+<load target="css/mboard.css" />
+<load target="filter/insert.xml" />
 <div class="bd" cond="$module_info->display_title != 'N'">
 	<h2><a href="{getUrl('','vid',$vid,'mid',$mid)}">{$module_info->browser_title}</a></h2>
 </div>
@@ -110,7 +114,7 @@
 <!--@end-->
 
 
-<!--@if($module_info->list_more == 'Y' || $module_info->list_more != 'N')-->
+<!--@if($module_info->list_more == 'N')-->
 <div class="pn" cond="$document_list || $notice_list">
 
 <!--@if($page != 1)-->
@@ -122,4 +126,16 @@
 <!--@endif-->
 
 </div>
+<!--@end-->
+<!--@if($module_info->list_more == 'Y')-->
+    <div class="elise-pagination cfix" cond="$document_list || $notice_list" id="pagess" style="display:none;">
+        <a href="{getUrl('page','','document_srl','','division',$division,'last_division',$last_division)}" class="page-direction page-prev"><span class="arrow-prev">←</span>First Page</a> 
+        <div class="page-list">
+        	<block loop="$page_no=$page_navigation->getNextPage()">
+            	<span cond="$page==$page_no" class="page page-current"><span class="page-current-mark"></span>{$page_no}</span>
+                <a cond="$page!=$page_no" class="page page-link" href="{getUrl('page',$page_no,'document_srl','','division',$division,'last_division',$last_division)}">{$page_no}</a>
+			</block>
+        </div>
+        <a href="{getUrl('page',$page_navigation->last_page,'document_srl','','division',$division,'last_division',$last_division)}" class="page-direction page-next">Last Page<span class="arrow-next">→</span></a>
+    </div><!-- .elise-pagination -->
 <!--@end-->
