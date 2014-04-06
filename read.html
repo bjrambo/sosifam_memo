@@ -119,6 +119,12 @@ jQuery(function($) {
 								</div>
 								<div class="bullet left">•</div>
 								<div class="lulu-comment-time left">{getTimeGap($comment->get('regdate'), "Y.m.d H:i")}</div>
+								<!--@if(!$oDocument->isNotice() && $grant->write_comment)-->
+								<a href="#" onclick="toggle_object('1reply_{$comment->comment_srl}'); return false;" title="{$lang->cmd_reply}" cond="$grant->write_comment" class="clarity-white btn_reply mr-f4" style="float:right" ><span>{$lang->cmd_reply}</span></a>			
+
+								<!--@end-->
+								<a href="{getUrl('act','dispBoardDeleteComment','comment_srl',$comment->comment_srl)}" class="clarity-white mr-f4 right" cond="$comment->isGranted()||!$comment->get('member_srl')"><span>{$lang->cmd_delete}</span></a>
+								<a href="{getUrl('act','dispBoardModifyComment','comment_srl',$comment->comment_srl)}" class="clarity-white mr-f4 mr-f2 right" cond="$comment->isGranted()||!$comment->get('member_srl')" ><span>{$lang->cmd_modify}</span></a>
 							</div>
                             
 							<div id="clist_{$comment->comment_srl}" class="lulu-comment-content cfixsosi">
@@ -128,16 +134,11 @@ jQuery(function($) {
 										$oComment = &getModel('comment');
 										$comment_parent = $oComment->getComment($comment->parent_srl);
 									}
-									To. {$comment_parent->getNickName()}
+									<strong style="color:#000">@{$comment_parent->getNickName()}</strong>
 									<!--@end-->
 									{$comment->getContentText(text)}
 								</div>
-								<!--@if(!$oDocument->isNotice() && $grant->write_comment)-->
-								<a href="#" onclick="toggle_object('1reply_{$comment->comment_srl}'); return false;" title="{$lang->cmd_reply}" cond="$grant->write_comment" class="clarity-white btn_reply mr-f4" style="float:right" ><span>{$lang->cmd_reply}</span></a>			
 
-								<!--@end-->
-								<a href="{getUrl('act','dispBoardDeleteComment','comment_srl',$comment->comment_srl)}" class="clarity-white mr-f4 right" cond="$comment->isGranted()||!$comment->get('member_srl')"><span>{$lang->cmd_delete}</span></a>
-								<a href="{getUrl('act','dispBoardModifyComment','comment_srl',$comment->comment_srl)}" class="clarity-white mr-f4 mr-f2 right" cond="$comment->isGranted()||!$comment->get('member_srl')" ><span>{$lang->cmd_modify}</span></a>
 							</div>
 							<div id="cinsert_{$comment->comment_srl}" style="display:none;"><include target="insert_comment.html" /></div>
 							

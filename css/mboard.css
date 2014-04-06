@@ -369,7 +369,7 @@ border: 1px solid #ccc;
 	position:absolute; top:10px; right:0;
 }
 
-.lulu-list .lulu-comment .comment-info-top { position:relative; height:15px; overflow:hidden }
+.lulu-list .lulu-comment .comment-info-top { position:relative; line-height:25px; overflow:hidden }
 
 .lulu-list .lulu-comment .lulu-comment-nick { position:relative; color:#666; font-weight:800; font-size:12px;}
 .lulu-list .lulu-comment .lulu-comment-time { color:#999}
