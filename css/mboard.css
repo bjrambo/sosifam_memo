@@ -182,11 +182,11 @@ border: 1px solid #ccc;
 	font-family: 'Helvetica Neue', Helvetica, 나눔고딕, NanumGothic, ng, 'Open Sans', 'Myriad Pro', Verdana, 돋움, dotum, sans-serif;
 }
 .lulu-list .lulu-main .bullet { 
-	font-size: 75%; color: #ccc; line-height:39px; padding:0 6px; 
+	font-size: 75%; color: #ccc; padding:0 6px; 
 	font-family: "Helvetica Neue",arial,sans-serif;
 }
 .lulu-list .lulu-main .spotify {
-	font-size: 20px; line-height:39px; line-height:40px\9; padding:0 0 0 2px; 
+	font-size: 20px;  padding:0 0 0 2px; 
 	margin-top: -3px;
 	font-family: "Helvetica Neue",arial,sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -287,7 +287,10 @@ border: 1px solid #ccc;
 .lulu-list .lulu-content-thumb2 {
 	display:block;
 }
-.lulu-list .lulu-content-info { position:relative; margin-bottom:10px; }
+.lulu-list .lulu-content-info { 
+	position:relative;
+	margin-bottom:10px;
+}
 .lulu-list .lulu-content-info .lulu-content-title {
 	font-size: 13px; font-weight: 800; line-height: 17px; 
 	overflow:hidden; padding-right:150px;
@@ -303,10 +306,13 @@ border: 1px solid #ccc;
 	right:0;
 }
 
-.lulu-list .lulu-content-info .lulu-title-link { color:#303030 }
+.lulu-list .lulu-content-info .lulu-title-link {
+	color:#303030;
+}
 
 .lulu-list .lulu-content-info .lulu-title-item.category {
 	display:block;
+	position:absolute;
 	padding:0;
 	background:#ccc;
 	color:#fff;
@@ -314,19 +320,21 @@ border: 1px solid #ccc;
 	height:20px;
 	line-height:20px;
 	text-align:center;
-	margin-top:7px;
+
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 	border-radius: 5px;
 }
-.lulu-list .lulu-content-info .lulu-title-link.time-data{
+.lulu-list .lulu-content-info .lulu-title-link.time-data {
 	font-size: 11px; font-weight:400; color:#898989;
-	height:33px; line-height:33px; padding:0 0 0 0; 
+	padding:0 0 0 0; 
 	font-family: 'Helvetica Neue', Helvetica, 나눔고딕, NanumGothic, ng, 'Open Sans', 'Myriad Pro', Verdana, 돋움, dotum, sans-serif;
 }
-
+.lulu-list .lulu-content-info .lulu-title-link.massege {
+	margin-left:40px;
+}
 
 .lulu-list .lulu-content-info .lulu-content-text {
 	font-size: 12px; font-weight: 400; line-height: 17px; 
