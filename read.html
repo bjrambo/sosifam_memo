@@ -1,30 +1,5 @@
 <script cond="$document_srl">location.href="{getUrl('','mid',$mid,'page',$page)}"</script>
-<!--@if($module_info->list_more == 'Y')-->
-<script type="text/javascript"> 
-jQuery(function($) {
-	var $container = $('.lulu-list');
 
-	$container.infinitescroll({
-      navSelector  : '.elise-pagination',    // selector for the paged navigation 
-      nextSelector : '.page-link',  // selector for the NEXT link (to page 2)
-      itemSelector : '.lulu-list .lulu-item',     // selector for all items you'll retrieve
-      loading: {
-          finishedMsg: 'Last page'
-        }
-      },
-      function( newElements ) {
-        var $newElems = $( newElements ).css({ opacity: 0 });
-        $newElems.imagesLoaded(function(){
-          $newElems.animate({ opacity: 1 });
-          $container.masonry( 'appended', $newElems, true ); 
-        });
-      }
-    );
-  
-
-});
-</script>
-<!--@end-->
 
 <ul class="lulu-list cfixsosi clarity-font" id="lulu">
 
