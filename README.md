@@ -31,6 +31,7 @@ Author
 
 * website : http://sosifam.com
 * email : sosifam@070805.co.kr
+* Github : https://github.com/qw5414/sosifam_memo
 
 ¾÷µ« ³ëÆ®
 
